@@ -36,7 +36,6 @@ public class BlockDisassembler extends BlockContainer {
         this.top = iconregister.registerIcon("roomdisassembler:rd_top");
         this.bottom = iconregister.registerIcon("roomdisassembler:rd_bottom");
         this.blockIcon = side;
-
     }
 
     @Override
@@ -70,23 +69,52 @@ public class BlockDisassembler extends BlockContainer {
 
         switch (meta) {
             case 0: //Bottom
-                tile.loc1.travel(0, -1, 0);
-                sendChatMsg("Clicked Bottom", world, player);
+                if (player.isSneaking()) {
+                    if (!(tile.loc1.y == tile.loc2.y))
+                        tile.loc1.travel(0, 1, 0);
+                } else {
+                    tile.loc1.travel(0, -1, 0);
+                }
                 break;
             case 1: //Top
-                sendChatMsg("Clicked Top", world, player);
+                if (player.isSneaking()) {
+                    if (!(tile.loc1.y == tile.loc2.y))
+                        tile.loc2.travel(0, 1, 0);
+                } else {
+                    tile.loc2.travel(0, -1, 0);
+                }
                 break;
             case 2:  //North Side
-                sendChatMsg("Clicked North", world, player);
+                if (player.isSneaking()) {
+                    if (!(tile.loc1.x == tile.loc2.x))
+                        tile.loc1.travel(-1, 0, 0);
+                } else {
+                    tile.loc1.travel(1, 0, 0);
+                }
                 break;
             case 3: //South Side
-                sendChatMsg("Clicked South", world, player);
+                if (player.isSneaking()) {
+                    if (!(tile.loc1.x == tile.loc2.x))
+                        tile.loc2.travel(-1, 0, 0);
+                } else {
+                    tile.loc2.travel(1, 0, 0);
+                }
                 break;
             case 4: //West Side
-                sendChatMsg("Clicked West", world, player);
+                if (player.isSneaking()) {
+                    if (!(tile.loc1.z == tile.loc2.z))
+                        tile.loc1.travel(-1, 0, 0);
+                } else {
+                    tile.loc1.travel(1, 0, 0);
+                }
                 break;
             case 5: //East Side
-                sendChatMsg("Clicked East", world, player);
+                if (player.isSneaking()) {
+                    if (!(tile.loc1.z == tile.loc2.z))
+                        tile.loc2.travel(-1, 0, 0);
+                } else {
+                    tile.loc2.travel(1, 0, 0);
+                }
                 break;
             default:
                 sendChatMsg("Opps, something happened!", world, player);
