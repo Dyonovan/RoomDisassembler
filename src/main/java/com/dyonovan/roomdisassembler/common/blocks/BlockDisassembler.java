@@ -9,6 +9,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
@@ -58,13 +59,17 @@ public class BlockDisassembler extends BlockContainer {
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta,
                                     float hitX, float hitY, float hitZ) {
 
-        if (player.isSneaking() && world.getTileEntity(x, y, z) != null) {
+        TileRoomDisassembler tile = (TileRoomDisassembler) world.getTileEntity(x, y, z);
+        if (tile == null) return false;
+
+        if (player.getHeldItem() = Items.apple) {
             player.openGui(RoomDisassembler.instance, GuiManager.ROOM_DISASSEMBLER_ID, world, x, y, z);
             return true;
         }
 
         switch (meta) {
             case 0: //Bottom
+                tile.loc1.travel(0, -1, 0);
                 sendChatMsg("Clicked Bottom", world, player);
                 break;
             case 1: //Top
