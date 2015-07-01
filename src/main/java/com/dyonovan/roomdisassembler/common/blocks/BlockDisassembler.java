@@ -59,12 +59,6 @@ public class BlockDisassembler extends BlockContainer {
     @Override
     public void onBlockAdded(World world, int x, int y, int z) {
         super.onBlockAdded(world, x, y, z);
-
-        TileRoomDisassembler tile = (TileRoomDisassembler) world.getTileEntity(x, y, z);
-        if (tile == null) return;
-
-        tile.loc1 = new Location(x + 5, y, z + 5);
-        tile.loc2 = new Location(x - 5, y + 5, z - 5);
     }
 
     @Override
