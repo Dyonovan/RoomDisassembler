@@ -1,6 +1,7 @@
 package com.dyonovan.roomdisassembler.common.blocks;
 
 import com.dyonovan.roomdisassembler.RoomDisassembler;
+import com.dyonovan.roomdisassembler.client.renderers.BlockRoomDisassemblerRenderer;
 import com.dyonovan.roomdisassembler.common.tileentities.TileRoomDisassembler;
 import com.dyonovan.roomdisassembler.managers.GuiManager;
 import cpw.mods.fml.relauncher.Side;
@@ -98,5 +99,20 @@ public class BlockDisassembler extends BlockContainer {
         if (world.isRemote) {
             player.addChatComponentMessage(new ChatComponentText(msg));
         }
+    }
+
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
+
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
+
+    @Override
+    public int getRenderType() {
+        return BlockRoomDisassemblerRenderer.renderID;
     }
 }
