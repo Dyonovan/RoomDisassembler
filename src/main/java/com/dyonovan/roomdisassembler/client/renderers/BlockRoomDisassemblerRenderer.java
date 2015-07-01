@@ -1,7 +1,6 @@
 package com.dyonovan.roomdisassembler.client.renderers;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -10,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 public class BlockRoomDisassemblerRenderer implements ISimpleBlockRenderingHandler {
 
-    public static int renderID = RenderingRegistry.getNextAvailableRenderId();
+    public static int renderID;
 
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
@@ -57,7 +56,7 @@ public class BlockRoomDisassemblerRenderer implements ISimpleBlockRenderingHandl
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-        renderer.renderBlockAllFaces(block, x, y, z);
+        renderer.renderStandardBlock(block, x, y, z);
         return true;
     }
 

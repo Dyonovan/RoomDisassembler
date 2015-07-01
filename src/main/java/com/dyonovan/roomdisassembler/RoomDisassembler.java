@@ -42,6 +42,8 @@ public class RoomDisassembler {
     public void preInit(FMLPreInitializationEvent event) {
         BlockManager.init();
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiManager());
+
+        proxy.preInit();
     }
 
     @EventHandler

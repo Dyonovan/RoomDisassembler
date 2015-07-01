@@ -156,5 +156,4 @@ public class NinePatchRenderer {
     public static void setColor(Color color) {
         GL11.glColor4f(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F);
     }
-
 }
