@@ -5,6 +5,7 @@ import cofh.api.energy.IEnergyHandler;
 import com.dyonovan.roomdisassembler.util.Location;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -18,6 +19,8 @@ public class TileRoomDisassembler extends TileEntity implements IEnergyHandler {
 
     public TileRoomDisassembler() {
 
+        loc1 = new Location(xCoord + 5, yCoord, zCoord + 5);
+        loc2 = new Location(xCoord - 5, yCoord + 5, zCoord - 5);
     }
 
 
