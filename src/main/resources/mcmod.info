@@ -1,0 +1,16 @@
+[
+{
+  "modid": "roomdisassembler",
+  "name": "Room-Disassembler",
+  "description": "Disassembles Machines in an Area",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Dyonovan"],
+  "credits": "_Beef for the idea",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
