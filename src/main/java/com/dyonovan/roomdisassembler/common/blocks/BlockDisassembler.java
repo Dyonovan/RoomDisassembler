@@ -2,6 +2,7 @@ package com.dyonovan.roomdisassembler.common.blocks;
 
 import com.dyonovan.roomdisassembler.RoomDisassembler;
 import com.dyonovan.roomdisassembler.common.tileentities.TileRoomDisassembler;
+import com.dyonovan.roomdisassembler.managers.GuiManager;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
@@ -58,7 +59,7 @@ public class BlockDisassembler extends BlockContainer {
                                     float hitX, float hitY, float hitZ) {
 
         if (player.isSneaking() && world.getTileEntity(x, y, z) != null) {
-            player.openGui(RoomDisassembler.instance, RoomDisassembler.GUIs.RoomDisassembler.ordinal(), world, x, y, z);
+            player.openGui(RoomDisassembler.instance, GuiManager.ROOM_DISASSEMBLER_ID, world, x, y, z);
             return true;
         }
 
