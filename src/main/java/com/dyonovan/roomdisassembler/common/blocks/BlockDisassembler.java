@@ -63,7 +63,7 @@ public class BlockDisassembler extends BlockContainer {
         TileRoomDisassembler tile = (TileRoomDisassembler) world.getTileEntity(x, y, z);
         if (tile == null) return false;
 
-        if (player.getHeldItem() = Items.apple) {
+        if (player.getHeldItem().getItem() == Items.apple) {
             player.openGui(RoomDisassembler.instance, GuiManager.ROOM_DISASSEMBLER_ID, world, x, y, z);
             return true;
         }
