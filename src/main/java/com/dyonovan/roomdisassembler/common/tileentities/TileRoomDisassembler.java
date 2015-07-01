@@ -14,8 +14,7 @@ public class TileRoomDisassembler extends TileEntity implements IEnergyHandler {
     public Location loc2;
 
     public TileRoomDisassembler() {
-        loc1 = new Location(xCoord + 5, yCoord, zCoord + 5);
-        loc2 = new Location(xCoord - 5, yCoord + 5, zCoord - 5);
+
     }
 
 

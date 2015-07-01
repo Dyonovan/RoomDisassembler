@@ -4,6 +4,7 @@ import com.dyonovan.roomdisassembler.RoomDisassembler;
 import com.dyonovan.roomdisassembler.client.renderers.BlockRoomDisassemblerRenderer;
 import com.dyonovan.roomdisassembler.common.tileentities.TileRoomDisassembler;
 import com.dyonovan.roomdisassembler.managers.GuiManager;
+import com.dyonovan.roomdisassembler.util.Location;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
@@ -53,6 +54,17 @@ public class BlockDisassembler extends BlockContainer {
     @Override
     public TileEntity createNewTileEntity(World world, int i) {
         return new TileRoomDisassembler();
+    }
+
+    @Override
+    public void onBlockAdded(World world, int x, int y, int z) {
+        super.onBlockAdded(world, x, y, z);
+
+        TileRoomDisassembler tile = (TileRoomDisassembler) world.getTileEntity(x, y, z);
+        if (tile == null) return;
+
+        tile.loc1 = new Location(x + 5, y, z + 5);
+        tile.loc2 = new Location(x - 5, y + 5, z - 5);
     }
 
     @Override
