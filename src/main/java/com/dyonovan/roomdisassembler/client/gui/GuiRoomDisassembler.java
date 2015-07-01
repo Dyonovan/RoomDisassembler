@@ -13,9 +13,4 @@ public class GuiRoomDisassembler extends GuiBase<ContainerRoomDisassembler> {
     public void addComponents() {
 
     }
-
-    @Override
-    protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
-
-    }
 }
