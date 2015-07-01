@@ -32,7 +32,7 @@ public class TileEntityRoomDisassemblerRenderer extends TileEntitySpecialRendere
         end.copyLocation(roomThing.loc2);
 
         //Move to start Position
-        GL11.glTranslated(x, y, z);
+       // GL11.glTranslated(x, y, z);
 
         Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Constants.MODID + ":textures/blocks/displayArea.png"));
 

@@ -3,8 +3,11 @@ package com.dyonovan.roomdisassembler.common.tileentities;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
 import com.dyonovan.roomdisassembler.util.Location;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileRoomDisassembler extends TileEntity implements IEnergyHandler {
@@ -65,5 +68,12 @@ public class TileRoomDisassembler extends TileEntity implements IEnergyHandler {
         storage.writeToNBT(nbt);
         loc1.writeToNBT(nbt);
         loc2.writeToNBT(nbt);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public AxisAlignedBB getRenderBoundingBox() {
+        AxisAlignedBB box = super.getRenderBoundingBox();
+        return box.expand(1000, 1000, 1000);
     }
 }
