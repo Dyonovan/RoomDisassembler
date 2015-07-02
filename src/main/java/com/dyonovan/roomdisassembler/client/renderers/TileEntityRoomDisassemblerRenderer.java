@@ -35,14 +35,15 @@ public class TileEntityRoomDisassemblerRenderer extends TileEntitySpecialRendere
         Location end = new Location();
         end.copyLocation(roomThing.loc2);
 
-        //Move to start Position
-       // GL11.glTranslated(x, y, z);
-
         EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-        Tessellator.instance.setTranslation(-player.posX, -player.posY, -player.posZ);
+
+        double playerX = player.prevPosX + (player.posX - player.prevPosX) * f;
+        double playerY = player.prevPosY + (player.posY - player.prevPosY) * f;
+        double playerZ = player.prevPosZ + (player.posZ - player.prevPosZ) * f;
+
+        Tessellator.instance.setTranslation(-playerX, -playerY, -playerZ);
 
         Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Constants.MODID + ":textures/blocks/displayArea.png"));
-
 
         renderAABB(AxisAlignedBB.getBoundingBox(begin.x + 0.5, begin.y + 0.5, begin.z + 0.5, end.x + 0.5, end.y + 0.5, end.z + 0.5));
         renderAABB(AxisAlignedBB.getBoundingBox(end.x + 0.5, end.y + 0.5, end.z + 0.5, begin.x + 0.5, begin.y + 0.5, begin.z + 0.5));
@@ -51,77 +52,40 @@ public class TileEntityRoomDisassemblerRenderer extends TileEntitySpecialRendere
         GL11.glPopMatrix();
     }
 
-    public static void renderAABB(AxisAlignedBB paramAxisAlignedBB)
-    {
-        double d = 0.006D;
+    public static void renderAABB(AxisAlignedBB paramAxisAlignedBB) {
+        double d = 0.001D;
 
-        Tessellator localTessellator = Tessellator.instance;
-        localTessellator.startDrawingQuads();
-        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
-        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
-        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
-        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
-
-        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
-        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
-        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
-        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
-
-        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
-        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
-        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
-        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
-
-        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
-        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
-        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
-        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
-
-        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
-        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
-        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
-        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
-
-        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
-        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
-        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
-        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
-        localTessellator.draw();
-    }
-
-    public static void renderCube(Tessellator tes, double x1, double y1, double z1, double x2, double y2, double z2) {
+        Tessellator tes = Tessellator.instance;
         tes.startDrawingQuads();
+        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
+        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
+        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
+        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
 
-        tes.addVertexWithUV(x1, y1, z1, 0, 0);
-        tes.addVertexWithUV(x1, y2, z1, 0, 1);
-        tes.addVertexWithUV(x2, y2, z1, 1, 1);
-        tes.addVertexWithUV(x2, y1, z1, 1, 0);
+        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
+        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
+        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
+        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
 
-        tes.addVertexWithUV(x1, y1, z2, 0, 0);
-        tes.addVertexWithUV(x2, y1, z2, 0, 1);
-        tes.addVertexWithUV(x2, y2, z2, 1, 1);
-        tes.addVertexWithUV(x1, y2, z2, 1, 0);
+        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
+        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
+        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
+        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
 
-        tes.addVertexWithUV(x1, y1, z1, 0, 0);
-        tes.addVertexWithUV(x1, y1, z2, 0, 1);
-        tes.addVertexWithUV(x1, y2, z2, 1, 1);
-        tes.addVertexWithUV(x1, y2, z1, 1, 0);
+        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
+        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
+        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
+        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
 
-        tes.addVertexWithUV(x2, y1, z1, 0, 0);
-        tes.addVertexWithUV(x2, y2, z1, 0, 1);
-        tes.addVertexWithUV(x2, y2, z2, 1, 1);
-        tes.addVertexWithUV(x2, y1, z2, 1, 0);
+        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
+        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
+        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
+        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
 
-        tes.addVertexWithUV(x1, y1, z1, 0, 0);
-        tes.addVertexWithUV(x2, y1, z1, 0, 1);
-        tes.addVertexWithUV(x2, y1, z2, 1, 1);
-        tes.addVertexWithUV(x1, y1, z2, 1, 0);
-
-        tes.addVertexWithUV(x1, y2, z1, 0, 0);
-        tes.addVertexWithUV(x1, y2, z2, 0, 1);
-        tes.addVertexWithUV(x2, y2, z2, 1, 1);
-        tes.addVertexWithUV(x2, y2, z1, 1, 0);
-
+        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
+        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
+        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
+        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
         tes.draw();
     }
 
