@@ -29,7 +29,7 @@ public class TileEntityRoomDisassemblerRenderer extends TileEntitySpecialRendere
 
         Location begin = new Location();
         begin.copyLocation(roomThing.loc1);
-        
+
         Location end = new Location();
         end.copyLocation(roomThing.loc2);
 
@@ -94,7 +94,6 @@ public class TileEntityRoomDisassemblerRenderer extends TileEntitySpecialRendere
         GL11.glVertex3d(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
         GL11.glVertex3d(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
         GL11.glEnd();
-        //tes.draw();
     }
 
     public static void setColor(Color color) {
