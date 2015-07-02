@@ -21,7 +21,8 @@ public class TileRoomDisassembler extends TileEntity implements IEnergyHandler {
     public Location loc2;
 
     public TileRoomDisassembler() {
-        loc1 = loc2 = new Location();
+        loc1 = new Location();
+        loc2 = new Location();
     }
 
     @Override
@@ -67,16 +68,16 @@ public class TileRoomDisassembler extends TileEntity implements IEnergyHandler {
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
         storage.readFromNBT(nbt);
-        loc1.readFromNBT(nbt);
-        loc2.readFromNBT(nbt);
+        loc1.readFromNBT(nbt, "One");
+        loc2.readFromNBT(nbt, "Two");
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
         storage.writeToNBT(nbt);
-        loc1.writeToNBT(nbt);
-        loc2.writeToNBT(nbt);
+        loc1.writeToNBT(nbt, "One");
+        loc2.writeToNBT(nbt, "Two");
     }
 
     @Override

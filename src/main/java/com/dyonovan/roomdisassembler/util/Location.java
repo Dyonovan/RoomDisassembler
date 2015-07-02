@@ -101,6 +101,26 @@ public class Location {
         this.z = tag.getInteger("Location Z");
     }
 
+    /**
+     * Writes this to the tag
+     * @param tag The tag to write to
+     */
+    public void writeToNBT(NBTTagCompound tag, String id) {
+        tag.setInteger(id + "Location X", this.x);
+        tag.setInteger(id + "Location Y", this.y);
+        tag.setInteger(id + "Location Z", this.z);
+    }
+
+    /**
+     * Read the values for this from the tag
+     * @param tag The tag, must have this written to it
+     */
+    public void readFromNBT(NBTTagCompound tag, String id) {
+        this.x = tag.getInteger(id + "Location X");
+        this.y = tag.getInteger(id + "Location Y");
+        this.z = tag.getInteger(id + "Location Z");
+    }
+
     @Override
     public boolean equals(Object obj) {
         if(!(obj instanceof Location)) return false;
