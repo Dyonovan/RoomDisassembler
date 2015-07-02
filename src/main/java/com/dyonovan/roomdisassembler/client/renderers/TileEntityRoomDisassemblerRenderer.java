@@ -41,7 +41,7 @@ public class TileEntityRoomDisassemblerRenderer extends TileEntitySpecialRendere
         double playerY = player.prevPosY + (player.posY - player.prevPosY) * f;
         double playerZ = player.prevPosZ + (player.posZ - player.prevPosZ) * f;
 
-        Tessellator.instance.setTranslation(-playerX, -playerY, -playerZ);
+        GL11.glTranslated(-playerX, -playerY, -playerZ);
 
         Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Constants.MODID + ":textures/blocks/displayArea.png"));
 
@@ -55,38 +55,40 @@ public class TileEntityRoomDisassemblerRenderer extends TileEntitySpecialRendere
     public static void renderAABB(AxisAlignedBB paramAxisAlignedBB) {
         double d = 0.001D;
 
-        Tessellator tes = Tessellator.instance;
-        tes.startDrawingQuads();
-        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
-        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
-        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
-        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
+       /* Tessellator tes = Tessellator.instance;
+        tes.startDrawingQuads();*/
+        GL11.glBegin(GL11.GL_LINE_STRIP);
+        GL11.glVertex3d(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
+        GL11.glVertex3d(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
+        GL11.glVertex3d(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
+        GL11.glVertex3d(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
 
-        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
-        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
-        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
-        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
+        GL11.glVertex3d(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
+        GL11.glVertex3d(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
+        GL11.glVertex3d(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
+        GL11.glVertex3d(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
 
-        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
-        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
-        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
-        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
+        GL11.glVertex3d(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
+        GL11.glVertex3d(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
+        GL11.glVertex3d(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
+        GL11.glVertex3d(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
 
-        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
-        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
-        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
-        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
+        GL11.glVertex3d(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
+        GL11.glVertex3d(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
+        GL11.glVertex3d(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
+        GL11.glVertex3d(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
 
-        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
-        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
-        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
-        tes.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
+        GL11.glVertex3d(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
+        GL11.glVertex3d(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
+        GL11.glVertex3d(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
+        GL11.glVertex3d(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
 
-        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
-        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
-        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
-        tes.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
-        tes.draw();
+        GL11.glVertex3d(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
+        GL11.glVertex3d(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
+        GL11.glVertex3d(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
+        GL11.glVertex3d(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
+        GL11.glEnd();
+        //tes.draw();
     }
 
     public static void setColor(Color color) {
