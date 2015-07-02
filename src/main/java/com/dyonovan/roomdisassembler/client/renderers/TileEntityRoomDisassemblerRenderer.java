@@ -3,7 +3,6 @@ package com.dyonovan.roomdisassembler.client.renderers;
 import com.dyonovan.roomdisassembler.common.tileentities.TileRoomDisassembler;
 import com.dyonovan.roomdisassembler.lib.Constants;
 import com.dyonovan.roomdisassembler.util.Location;
-import com.sun.prism.util.tess.Tess;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
