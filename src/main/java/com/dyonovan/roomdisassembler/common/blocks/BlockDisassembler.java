@@ -68,7 +68,7 @@ public class BlockDisassembler extends BlockContainer {
         TileRoomDisassembler tile = (TileRoomDisassembler) world.getTileEntity(x, y, z);
         if (tile == null) return false;
 
-        if (player.getHeldItem().getItem() == Items.apple) {
+        if (player.getHeldItem() != null && player.getHeldItem().getItem() == Items.apple) {
             player.openGui(RoomDisassembler.instance, GuiManager.ROOM_DISASSEMBLER_ID, world, x, y, z);
             return true;
         }
@@ -76,48 +76,42 @@ public class BlockDisassembler extends BlockContainer {
         switch (meta) {
             case 0: //Bottom
                 if (player.isSneaking()) {
-                    if (!(tile.loc1.y == tile.loc2.y))
-                        tile.loc1.travel(0, 1, 0);
+                    tile.loc1.travel(0, 1, 0);
                 } else {
                     tile.loc1.travel(0, -1, 0);
                 }
                 break;
             case 1: //Top
                 if (player.isSneaking()) {
-                    if (!(tile.loc1.y == tile.loc2.y))
-                        tile.loc2.travel(0, 1, 0);
+                    tile.loc2.travel(0, 1, 0);
                 } else {
                     tile.loc2.travel(0, -1, 0);
                 }
                 break;
             case 2:  //North Side
                 if (player.isSneaking()) {
-                    if (!(tile.loc1.x == tile.loc2.x))
-                        tile.loc1.travel(-1, 0, 0);
+                    tile.loc1.travel(0, 0, -1);
                 } else {
-                    tile.loc1.travel(1, 0, 0);
+                    tile.loc1.travel(0, 0, 1);
                 }
                 break;
             case 3: //South Side
                 if (player.isSneaking()) {
-                    if (!(tile.loc1.x == tile.loc2.x))
-                        tile.loc2.travel(-1, 0, 0);
+                    tile.loc2.travel(0, 0, -1);
                 } else {
-                    tile.loc2.travel(1, 0, 0);
+                    tile.loc2.travel(0, 0, 1);
                 }
                 break;
             case 4: //West Side
                 if (player.isSneaking()) {
-                    if (!(tile.loc1.z == tile.loc2.z))
-                        tile.loc1.travel(-1, 0, 0);
+                    tile.loc1.travel(-1, 0, 0);
                 } else {
                     tile.loc1.travel(1, 0, 0);
                 }
                 break;
             case 5: //East Side
                 if (player.isSneaking()) {
-                    if (!(tile.loc1.z == tile.loc2.z))
-                        tile.loc2.travel(-1, 0, 0);
+                    tile.loc2.travel(-1, 0, 0);
                 } else {
                     tile.loc2.travel(1, 0, 0);
                 }
