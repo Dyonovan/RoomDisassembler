@@ -1,7 +1,7 @@
 package com.dyonovan.roomdisassembler.managers;
 
-import com.dyonovan.roomdisassembler.client.gui.GuiRoomDisassembler;
-import com.dyonovan.roomdisassembler.common.container.ContainerRoomDisassembler;
+import com.dyonovan.roomdisassembler.client.gui.GuiDisassembler;
+import com.dyonovan.roomdisassembler.common.container.ContainerDisassembler;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -15,7 +15,7 @@ public class GuiManager implements IGuiHandler {
 
         switch(ID) {
             case ROOM_DISASSEMBLER_ID:
-                return new ContainerRoomDisassembler(player.inventory);
+                return new ContainerDisassembler(player.inventory);
             default:
                 return null;
         }
@@ -25,7 +25,7 @@ public class GuiManager implements IGuiHandler {
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         switch(ID) {
             case ROOM_DISASSEMBLER_ID:
-                return new GuiRoomDisassembler(player.inventory);
+                return new GuiDisassembler(player.inventory);
             default:
                 return null;
         }

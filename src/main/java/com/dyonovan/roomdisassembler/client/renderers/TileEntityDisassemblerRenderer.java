@@ -1,8 +1,8 @@
 package com.dyonovan.roomdisassembler.client.renderers;
 
-import com.dyonovan.roomdisassembler.common.tileentities.TileRoomDisassembler;
+import com.dyonovan.brlib.collections.Location;
+import com.dyonovan.roomdisassembler.common.tileentities.TileDisassembler;
 import com.dyonovan.roomdisassembler.lib.Constants;
-import com.dyonovan.roomdisassembler.util.Location;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
-public class TileEntityRoomDisassemblerRenderer extends TileEntitySpecialRenderer {
+public class TileEntityDisassemblerRenderer extends TileEntitySpecialRenderer {
 
     @Override
     public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float f) {
@@ -25,7 +25,7 @@ public class TileEntityRoomDisassemblerRenderer extends TileEntitySpecialRendere
 
         setColor(new Color(200, 4, 65));
 
-        TileRoomDisassembler roomThing = (TileRoomDisassembler)tile;
+        TileDisassembler roomThing = (TileDisassembler)tile;
 
         Location begin = new Location();
         begin.copyLocation(roomThing.loc1);

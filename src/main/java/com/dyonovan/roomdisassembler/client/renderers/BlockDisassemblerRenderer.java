@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
-public class BlockRoomDisassemblerRenderer implements ISimpleBlockRenderingHandler {
+public class BlockDisassemblerRenderer implements ISimpleBlockRenderingHandler {
 
     public static int renderID;
 

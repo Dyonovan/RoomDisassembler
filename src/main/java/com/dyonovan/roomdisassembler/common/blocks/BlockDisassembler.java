@@ -1,10 +1,9 @@
 package com.dyonovan.roomdisassembler.common.blocks;
 
 import com.dyonovan.roomdisassembler.RoomDisassembler;
-import com.dyonovan.roomdisassembler.client.renderers.BlockRoomDisassemblerRenderer;
-import com.dyonovan.roomdisassembler.common.tileentities.TileRoomDisassembler;
+import com.dyonovan.roomdisassembler.client.renderers.BlockDisassemblerRenderer;
+import com.dyonovan.roomdisassembler.common.tileentities.TileDisassembler;
 import com.dyonovan.roomdisassembler.managers.GuiManager;
-import com.dyonovan.roomdisassembler.util.Location;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
@@ -53,7 +52,7 @@ public class BlockDisassembler extends BlockContainer {
 
     @Override
     public TileEntity createNewTileEntity(World world, int i) {
-        return new TileRoomDisassembler();
+        return new TileDisassembler();
     }
 
     @Override
@@ -65,7 +64,7 @@ public class BlockDisassembler extends BlockContainer {
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta,
                                     float hitX, float hitY, float hitZ) {
 
-        TileRoomDisassembler tile = (TileRoomDisassembler) world.getTileEntity(x, y, z);
+        TileDisassembler tile = (TileDisassembler) world.getTileEntity(x, y, z);
         if (tile == null) return false;
 
         if (player.getHeldItem() != null && player.getHeldItem().getItem() == Items.apple) {
@@ -141,6 +140,6 @@ public class BlockDisassembler extends BlockContainer {
 
     @Override
     public int getRenderType() {
-        return BlockRoomDisassemblerRenderer.renderID;
+        return BlockDisassemblerRenderer.renderID;
     }
 }

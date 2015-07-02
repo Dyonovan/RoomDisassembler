@@ -6,9 +6,9 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerRoomDisassembler extends Container {
+public class ContainerDisassembler extends Container {
 
-    public ContainerRoomDisassembler(InventoryPlayer invPlayer) {
+    public ContainerDisassembler(InventoryPlayer invPlayer) {
 
         bindPlayerInventory(invPlayer);
 

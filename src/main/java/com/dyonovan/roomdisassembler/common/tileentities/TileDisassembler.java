@@ -2,10 +2,9 @@ package com.dyonovan.roomdisassembler.common.tileentities;
 
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
-import com.dyonovan.roomdisassembler.util.Location;
+import com.dyonovan.brlib.collections.Location;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -14,13 +13,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileRoomDisassembler extends TileEntity implements IEnergyHandler {
+public class TileDisassembler extends TileEntity implements IEnergyHandler {
 
     protected EnergyStorage storage = new EnergyStorage(32000);
     public Location loc1;
     public Location loc2;
 
-    public TileRoomDisassembler() {
+    public TileDisassembler() {
         loc1 = new Location();
         loc2 = new Location();
     }

@@ -41,8 +41,14 @@ minecraft {
     runDir = "eclipse"
 }
 
-dependencies {
+repositories {
+    maven {
+        url "http://www.beyondrealitypack.com/maven2/"
+    }
+}
 
+dependencies {
+    compile group: "com.dyonovan.brlib", name: "BR-Lib", version: "+", classifier: "dev"
 }
 
 processResources
