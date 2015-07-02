@@ -3,10 +3,13 @@ package com.dyonovan.roomdisassembler.client.renderers;
 import com.dyonovan.roomdisassembler.common.tileentities.TileRoomDisassembler;
 import com.dyonovan.roomdisassembler.lib.Constants;
 import com.dyonovan.roomdisassembler.util.Location;
+import com.sun.prism.util.tess.Tess;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
@@ -28,18 +31,62 @@ public class TileEntityRoomDisassemblerRenderer extends TileEntitySpecialRendere
         Location begin = new Location();
         begin.copyLocation(roomThing.loc1);
 
+
         Location end = new Location();
         end.copyLocation(roomThing.loc2);
 
         //Move to start Position
        // GL11.glTranslated(x, y, z);
 
+        EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+        Tessellator.instance.setTranslation(-player.posX, -player.posY, -player.posZ);
+
         Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Constants.MODID + ":textures/blocks/displayArea.png"));
 
-        renderCube(Tessellator.instance, begin.x + 0.001, begin.y + 0.001, begin.z + 0.001, end.x - 0.001, end.y - 0.001, end.z - 0.001);
-        renderCube(Tessellator.instance, end.x - 0.001, end.y - 0.001, end.z - 0.001, begin.x + 0.001, begin.y + 0.001, begin.z + 0.001);
 
+        renderAABB(AxisAlignedBB.getBoundingBox(begin.x + 0.5, begin.y + 0.5, begin.z + 0.5, end.x + 0.5, end.y + 0.5, end.z + 0.5));
+        renderAABB(AxisAlignedBB.getBoundingBox(end.x + 0.5, end.y + 0.5, end.z + 0.5, begin.x + 0.5, begin.y + 0.5, begin.z + 0.5));
+
+        Tessellator.instance.setTranslation(0, 0, 0);
         GL11.glPopMatrix();
+    }
+
+    public static void renderAABB(AxisAlignedBB paramAxisAlignedBB)
+    {
+        double d = 0.006D;
+
+        Tessellator localTessellator = Tessellator.instance;
+        localTessellator.startDrawingQuads();
+        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
+        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
+        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
+        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
+
+        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
+        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
+        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
+        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
+
+        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
+        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
+        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
+        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
+
+        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
+        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
+        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
+        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
+
+        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
+        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
+        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
+        localTessellator.addVertex(paramAxisAlignedBB.minX + d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
+
+        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.minZ + d);
+        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.minZ + d);
+        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.maxY - d, paramAxisAlignedBB.maxZ - d);
+        localTessellator.addVertex(paramAxisAlignedBB.maxX - d, paramAxisAlignedBB.minY + d, paramAxisAlignedBB.maxZ - d);
+        localTessellator.draw();
     }
 
     public static void renderCube(Tessellator tes, double x1, double y1, double z1, double x2, double y2, double z2) {
