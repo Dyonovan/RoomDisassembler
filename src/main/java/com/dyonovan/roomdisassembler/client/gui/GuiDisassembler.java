@@ -1,7 +1,8 @@
 package com.dyonovan.roomdisassembler.client.gui;
 
-import com.dyonovan.brlib.client.gui.GuiBase;
+
 import com.dyonovan.roomdisassembler.common.container.ContainerDisassembler;
+import com.teambr.bookshelf.client.gui.GuiBase;
 import net.minecraft.entity.player.InventoryPlayer;
 
 public class GuiDisassembler extends GuiBase<ContainerDisassembler> {

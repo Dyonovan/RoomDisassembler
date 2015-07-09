@@ -2,7 +2,7 @@ package com.dyonovan.roomdisassembler.common.tileentities;
 
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
-import com.dyonovan.brlib.collections.Location;
+import com.teambr.bookshelf.collections.Location;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.nbt.NBTTagCompound;

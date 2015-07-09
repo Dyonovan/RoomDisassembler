@@ -48,7 +48,7 @@ repositories {
 }
 
 dependencies {
-    compile group: "com.dyonovan.brlib", name: "BR-Lib", version: "+", classifier: "dev"
+    compile group: "com.teambr.bookshelf", name: "Bookshelf", version: "+", classifier: "dev"
 }
 
 processResources

@@ -1,8 +1,8 @@
 package com.dyonovan.roomdisassembler.client.renderers;
 
-import com.dyonovan.brlib.collections.Location;
 import com.dyonovan.roomdisassembler.common.tileentities.TileDisassembler;
 import com.dyonovan.roomdisassembler.lib.Constants;
+import com.teambr.bookshelf.collections.Location;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
